@@ -24,8 +24,8 @@ public class AudioPlayRedio {
     static {
         try {
             System.out.println("加载静态块代码");
-            File liveWarningFile = ResourceUtils.getFile("classpath:video/warning.wav");
-            File liveOkFile = ResourceUtils.getFile("classpath:video/liveok.wav");
+            File liveWarningFile = ResourceUtils.getFile("classpath:static/video/warning.wav");
+            File liveOkFile = ResourceUtils.getFile("classpath:static/video/liveok.wav");
             liveWarningClip = Applet.newAudioClip(liveWarningFile.toURL());
             liveOkClip = Applet.newAudioClip(liveOkFile.toURL());
             System.out.println("加载的文件" + liveOkFile.toString() + liveWarningFile.toString());
