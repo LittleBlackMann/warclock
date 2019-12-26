@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: war-clock
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${WAR_CLOCK_USERNAME:root}
+    password: ${WAR_CLOCK_PASSWORD:root}
+    url: jdbc:mysql://${WAR_CLOCK_HOST:127.0.0.1}:${WAR_CLOCK_PORT:3306}/warclock?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+server:
+  port: 1314

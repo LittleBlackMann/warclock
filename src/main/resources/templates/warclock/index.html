@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WAR CLOCK，LIVE STABLE</title>
+    <style type="text/css">
+        body {
+            background: #1a121f;
+            text-align: center;
+        }
+
+        .body {
+            width: 750px;
+            text-align: center;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            font-family: 'Mada', sans-serif;
+        }
+
+        .title {
+            color: #9e8686;
+            font-size: 50px;
+            margin-bottom: 50px;
+        }
+
+        .ul-title {
+            color: #9e8686;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .ul-title li {
+            float: left;
+            width: 30%;
+            text-align: center;
+            display: inline-block;
+            line-height: 50px;
+            font-size: 2em;
+        }
+
+        .ul-content li {
+            color: #738263;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+<div class="body">
+    <!-- 计时模式 -->
+    <div class="title">WAR CLOCK，LIVE STABLE</div>
+    <!-- 警告模式 -->
+    <div class="title hide" style="color: #ff0000;">LIVE DANGER，NEED HELP</div>
+    <!-- 处理模式 -->
+    <div class="title hide " style="color: #ff0">PEATCH COMBA</div>
+    <!-- 解除模式 -->
+    <div class="title hide " style="color: #0f0">PROBLEM COLSEDE</div>
+    <ul class="ul-title">
+        <li>DAYS</li>
+        <li>HOURS</li>
+        <li>MINUTES</li>
+    </ul>
+    <ul id="time" class="ul-title ul-content">
+    </ul>
+</div>
+</body>
+</html>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    //假设每隔5秒发送一次请求
+    window.onload = function () {
+        getApi();
+    }
+
+    function getApi() {
+        //设置时间 5-秒  1000-毫秒  这里设置你自己想要的时间
+        setTimeout(getApi, 5 * 1000);
+        $.ajax({
+            url: '/get_safe_time',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                $("#time").empty();
+                $.each(data.data, function (i, item) {
+                    $("#time").append(
+                        "<li>" + item.days + "</li>" +
+                        "<li>" + item.hours + "</li>" +
+                        "<li>" + item.minutes + "</li>"
+                        /*"<li>" + item.state + "</li>"*/
+                    )
+                })
+            }
+        })
+    }
+</script>
