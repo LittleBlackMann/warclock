@@ -9,3 +9,6 @@
 
 ### 三、执行 target 文件夹下的 jar 文件
 > 执行命令 ： `java -jar warclock-0.0.1-SNAPSHOT.jar &`
+
+### 四、打包命令
+> `mvn clean install -B`
