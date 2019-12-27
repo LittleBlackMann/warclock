@@ -105,7 +105,7 @@ public class WarClockServiceImpl implements WarClockService {
             resultVo.setTeam(warClockEntity.getTeam());
             resultVo.setState(ConstMap.stateMap.get(warClockEntity.getState()));
             if (warClockEntity.getState() == 2 || warClockEntity.getState() == 1) {
-                resultVo.setDays("000");
+                resultVo.setDays("00");
                 resultVo.setHours("00");
                 resultVo.setMinutes("00");
             } else {

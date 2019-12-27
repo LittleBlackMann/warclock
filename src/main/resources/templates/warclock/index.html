@@ -55,11 +55,11 @@
     <!-- 计时模式 -->
     <div class="title">WAR CLOCK，LIVE STABLE</div>
     <!-- 警告模式 -->
-    <div class="title hide" style="color: #ff0000;">LIVE DANGER，NEED HELP</div>
+    <div id="denger" class="title hide" style="color: #ff0000;">LIVE DANGER，NEED HELP</div>
     <!-- 处理模式 -->
-    <div class="title hide " style="color: #ff0">PEATCH COMBA</div>
+    <div id="warning" class="title hide " style="color: #ff0">PEATCH COMBA</div>
     <!-- 解除模式 -->
-    <div class="title hide " style="color: #0f0">PROBLEM COLSEDE</div>
+    <div id="close" class="title hide " style="color: #0f0">PROBLEM COLSEDE</div>
     <ul class="ul-title">
         <li>DAYS</li>
         <li>HOURS</li>
@@ -94,6 +94,21 @@
                         "<li>" + item.minutes + "</li>"
                         /*"<li>" + item.state + "</li>"*/
                     )
+                    if (item.state == "LIVE DANGER") {
+                        $("#denger").removeClass("hide")
+                        $("#warning").addClass("hide")
+                        $("#close").addClass("hide")
+                    }
+                    if (item.state == "PEATCH COMBAT") {
+                        $("#denger").addClass("hide")
+                        $("#warning").removeClass("hide")
+                        $("#close").addClass("hide")
+                    }
+                    if (item.state == "PROBLEM COLSED") {
+                        $("#denger").addClass("hide")
+                        $("#warning").addClass("hide")
+                        $("#close").removeClass("hide")
+                    }
                 })
             }
         })
