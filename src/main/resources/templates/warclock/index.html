@@ -26,7 +26,7 @@
         }
 
         .ul-title {
-            color: #f8fa36;
+            color: #fff;
             margin: 0 auto;
             overflow: hidden;
         }
@@ -56,11 +56,11 @@
 <body>
 <div class="body">
     <!-- 计时模式 -->
-    <div class="title">WAR CLOCK，LIVE STABLE</div>
+    <div id="stable" class="title hide">WAR CLOCK，LIVE STABLE</div>
     <!-- 警告模式 -->
     <div id="denger" class="title hide" style="color: #ff0000;">LIVE DANGER，NEED HELP</div>
     <!-- 处理模式 -->
-    <div id="warning" class="title hide " style="color: #ff0">PEATCH COMBA</div>
+    <div id="warning" class="title hide " style="color: #ff0">PEATCH COMBAT</div>
     <!-- 解除模式 -->
     <div id="close" class="title hide " style="color: #0f0">PROBLEM COLSEDE</div>
     <ul class="ul-title">
@@ -101,16 +101,19 @@
                         $("#denger").removeClass("hide")
                         $("#warning").addClass("hide")
                         $("#close").addClass("hide")
+                        $("#stable").addClass("hide")
                     }
                     if (item.state == "PEATCH COMBAT") {
                         $("#denger").addClass("hide")
                         $("#warning").removeClass("hide")
                         $("#close").addClass("hide")
+                        $("#stable").addClass("hide")
                     }
                     if (item.state == "PROBLEM COLSED") {
                         $("#denger").addClass("hide")
                         $("#warning").addClass("hide")
-                        $("#close").addveClass("hide")
+                        $("#close").addClass("hide")
+                        $("#stable").removeClass("hide")
                     }
                 })
             }
