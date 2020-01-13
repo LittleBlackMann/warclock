@@ -1,122 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>WAR CLOCK，LIVE STABLE</title>
-    <style type="text/css">
-        body {
-            background: #1a121f;
-            text-align: center;
-        }
-
-        .body {
-
-            /*text-align: center;
-            position: absolute;
-            transform: translate(-50%, -50%);
-            top: 50%;
-            left: 50%;*/
-            font-family: 'Mada', sans-serif;
-        }
-
-        .title {
-            color: #fff;
-            font-size: 60px;
-            margin-bottom: 50px;
-        }
-
-        .ul-title {
-            color: #fff;
-            margin: 0 auto;
-            overflow: hidden;
-        }
-
-        .ul-content {
-            font-size: 150px;
-        }
-
-        .ul-title li {
-            float: left;
-            width: 30%;
-            text-align: center;
-            display: inline-block;
-            font-size: 2em;
-        }
-
-        .ul-content li {
-            color: #fff;
-        }
-
-        .hide {
-            display: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>WAR CLOCK，LIVE STABLE</title>
+  <link rel="stylesheet" href="./css/clock.css">
 </head>
 
 <body>
-<div class="body">
-    <!-- 计时模式 -->
-    <div id="stable" class="title hide">WAR CLOCK，LIVE STABLE</div>
-    <!-- 警告模式 -->
-    <div id="denger" class="title hide" style="color: #ff0000;">LIVE DANGER，NEED HELP</div>
-    <!-- 处理模式 -->
-    <div id="warning" class="title hide " style="color: #ff0">PEATCH COMBAT</div>
-    <!-- 解除模式 -->
-    <div id="close" class="title hide " style="color: #0f0">PROBLEM COLSEDE</div>
-    <ul class="ul-title">
-        <li>DAYS</li>
-        <li>HOURS</li>
-        <li>MINUTES</li>
-    </ul>
-    <ul id="time" class="ul-title ul-content">
-    </ul>
-</div>
+  <div class="war-clock-state" id="clock-mode">
+    <span></span>
+  </div>
+  <main>
+    <canvas id="my-canvas"></canvas>
+    <div id="clock">
+      <p class="day-title">DAYS</p>
+      <div class="time-container day">
+        <div class="digit">
+          <div class="fade">&nbsp;</div>
+          <span class="num top" id="day-tens-top">1</span>
+          <span class="num bottom" id="day-tens-bottom">
+            <div class="bottom-container">1</div>
+          </span>
+          <div class="swapper">
+            <div id="top-day-tens-anim" class="num-anim top-anim" style="display:none;">
+              <div class="top-half-num">8</div>
+            </div>
+            <div id="bottom-day-tens-anim" class="num-anim bottom-anim" style="display:none;">
+              <div class="bottom-half-num">
+                <div class="dropper">9</div>
+              </div>
+            </div>
+          </div>
+          <div class="ring ring-left"></div>
+          <div class="ring ring-right"></div>
+        </div>
+        <div class="digit">
+          <div class="fade">&nbsp;</div>
+          <span class="num top" id="day-ones-top">3</span>
+          <span class="num bottom" id="day-ones-bottom">
+            <div class="bottom-container">3</div>
+          </span>
+          <div class="swapper">
+            <div id="top-day-ones-anim" class="num-anim top-anim" style="display:none;">
+              <div class="top-half-num">8</div>
+            </div>
+            <div id="bottom-day-ones-anim" class="num-anim bottom-anim" style="display:none;">
+              <div class="bottom-half-num">
+                <div class="dropper">9</div>
+              </div>
+            </div>
+          </div>
+          <div class="ring ring-left"></div>
+          <div class="ring ring-right"></div>
+        </div>
+      </div>
+      <p class="hours-title">HOURS</p>
+      <div class="time-container hours">
+        <div class="digit">
+          <div class="fade">&nbsp;</div>
+          <span class="num top" id="hour-tens-top">1</span>
+          <span class="num bottom" id="hour-tens-bottom">
+            <div class="bottom-container">1</div>
+          </span>
+          <div class="swapper">
+            <div id="top-hour-tens-anim" class="num-anim top-anim" style="display:none;">
+              <div class="top-half-num">8</div>
+            </div>
+            <div id="bottom-hour-tens-anim" class="num-anim bottom-anim" style="display:none;">
+              <div class="bottom-half-num">
+                <div class="dropper">9</div>
+              </div>
+            </div>
+          </div>
+          <div class="ring ring-left"></div>
+          <div class="ring ring-right"></div>
+        </div>
+        <div class="digit">
+          <div class="fade">&nbsp;</div>
+          <span class="num top" id="hour-ones-top">3</span>
+          <span class="num bottom" id="hour-ones-bottom">
+            <div class="bottom-container">3</div>
+          </span>
+          <div class="swapper">
+            <div id="top-hour-ones-anim" class="num-anim top-anim" style="display:none;">
+              <div class="top-half-num">8</div>
+            </div>
+            <div id="bottom-hour-ones-anim" class="num-anim bottom-anim" style="display:none;">
+              <div class="bottom-half-num">
+                <div class="dropper">9</div>
+              </div>
+            </div>
+          </div>
+          <div class="ring ring-left"></div>
+          <div class="ring ring-right"></div>
+        </div>
+      </div>
+      <p class="minutes-title">MINUTE</p>
+      <div class="time-container minutes">
+        <div class="digit">
+          <div class="fade">&nbsp;</div>
+          <span class="num top" id="minute-tens-top">4</span>
+          <span class="num bottom" id="minute-tens-bottom">
+            <div class="bottom-container">4</div>
+          </span>
+          <div class="swapper">
+            <div id="top-minute-tens-anim" class="num-anim top-anim" style="display:none;">
+              <div class="top-half-num">8</div>
+            </div>
+            <div id="bottom-minute-tens-anim" class="num-anim bottom-anim" style="display:none;">
+              <div class="bottom-half-num">
+                <div class="dropper">9</div>
+              </div>
+            </div>
+          </div>
+          <div class="ring ring-left"></div>
+          <div class="ring ring-right"></div>
+        </div>
+        <div class="digit">
+          <div class="fade">&nbsp;</div>
+          <span class="num top" id="minute-ones-top">3</span>
+          <span class="num bottom" id="minute-ones-bottom">
+            <div class="bottom-container">3</div>
+          </span>
+          <div class="swapper">
+            <div id="top-minute-ones-anim" class="num-anim top-anim" style="display:none;">
+              <div class="top-half-num">8</div>
+            </div>
+            <div id="bottom-minute-ones-anim" class="num-anim bottom-anim" style="display:none;">
+              <div class="bottom-half-num">
+                <div class="dropper">9</div>
+              </div>
+            </div>
+          </div>
+          <div class="ring ring-left"></div>
+          <div class="ring ring-right"></div>
+        </div>
+      </div>
+      <p class="seconds-title">SECOND</p>
+      <div class="time-container seconds">
+        <div class="digit">
+          <div class="fade">&nbsp;</div>
+          <span class="num top" id="second-tens-top">5</span>
+          <span class="num bottom" id="second-tens-bottom">
+            <div class="bottom-container">5</div>
+          </span>
+          <div class="swapper">
+            <div id="top-second-tens-anim" class="num-anim top-anim" style="display:none;">
+              <div class="top-half-num">8</div>
+            </div>
+            <div id="bottom-second-tens-anim" class="num-anim bottom-anim" style="display:none;">
+              <div class="bottom-half-num">
+                <div class="dropper">9</div>
+              </div>
+            </div>
+          </div>
+          <div class="ring ring-left"></div>
+          <div class="ring ring-right"></div>
+        </div>
+        <div class="digit">
+          <div class="fade">&nbsp;</div>
+          <span class="num top" id="second-ones-top">3</span>
+          <span class="num bottom" id="second-ones-bottom">
+            <div class="bottom-container">2</div>
+          </span>
+          <div class="swapper">
+            <div id="top-second-ones-anim" class="num-anim top-anim" style="display:none;">
+              <div class="top-half-num">2</div>
+            </div>
+            <div id="bottom-second-ones-anim" class="num-anim bottom-anim" style="display:none;">
+              <div class="bottom-half-num">
+                <div class="dropper">3</div>
+              </div>
+            </div>
+          </div>
+          <div class="ring ring-left"></div>
+          <div class="ring ring-right"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
 </body>
+
 </html>
 
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
-    //假设每隔5秒发送一次请求
-    window.onload = function () {
-        getApi();
-    }
-
-    function getApi() {
-        //设置时间 5-秒  1000-毫秒  这里设置你自己想要的时间
-        setTimeout(getApi, 5 * 1000);
-        $.ajax({
-            url: '/get_safe_time',
-            type: 'get',
-            dataType: 'json',
-            success: function (data) {
-                $("#time").empty();
-                $.each(data.data, function (i, item) {
-                    $("#time").append(
-                        "<li>" + item.days + "</li>" +
-                        "<li>" + item.hours + "</li>" +
-                        "<li>" + item.minutes + "</li>"
-                        /*"<li>" + item.state + "</li>"*/
-                    )
-                    if (item.state == "LIVE DANGER") {
-                        $("#denger").removeClass("hide")
-                        $("#warning").addClass("hide")
-                        $("#close").addClass("hide")
-                        $("#stable").addClass("hide")
-                    }
-                    if (item.state == "PEATCH COMBAT") {
-                        $("#denger").addClass("hide")
-                        $("#warning").removeClass("hide")
-                        $("#close").addClass("hide")
-                        $("#stable").addClass("hide")
-                    }
-                    if (item.state == "PROBLEM COLSED") {
-                        $("#denger").addClass("hide")
-                        $("#warning").addClass("hide")
-                        $("#close").addClass("hide")
-                        $("#stable").removeClass("hide")
-                    }
-                })
-            }
-        })
-    }
-</script>
+<script src="./js/jquery-3.4.1.min.js"></script>
+<script src="./js/clock.js"></script>
