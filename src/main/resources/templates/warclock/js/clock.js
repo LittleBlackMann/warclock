@@ -78,7 +78,7 @@ function updateTime() {
           'day': resData[0].days,//顯示當前天數
           'hour': resData[0].hours,//當前小時
           'minute': resData[0].minutes,//當前分鐘
-          'second': currentTime.getSeconds(),//當前秒
+          'second': resData[0].seconds ? resData[0].seconds : currentTime.getSeconds(),//當前秒
         };
         $.each(resData, function (i, item) {
           if (item.state === "LIVE DANGER") {
