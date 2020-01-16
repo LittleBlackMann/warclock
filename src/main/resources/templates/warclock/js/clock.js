@@ -1,7 +1,9 @@
 
-// 本地請求地址
-const URL = 'http://172.21.77.250:1314';
-// const URL = '';
+// 線上請求地址
+// const URL = 'http://172.21.77.250:1314';
+// 小田本地
+// const URL = 'http://172.21.76.18:1314';
+const URL = '';
 
 // 只在正常模式时每 2 小时显示一次，每次显示 10s，后切换回正常模式
 let countdown = 10;
@@ -78,7 +80,7 @@ function updateTime() {
           'day': resData[0].days,//顯示當前天數
           'hour': resData[0].hours,//當前小時
           'minute': resData[0].minutes,//當前分鐘
-          'second': resData[0].seconds ? resData[0].seconds : currentTime.getSeconds(),//當前秒
+          'second': resData[0].seconds,//當前秒
         };
         $.each(resData, function (i, item) {
           if (item.state === "LIVE DANGER") {
