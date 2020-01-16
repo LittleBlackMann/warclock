@@ -2,8 +2,8 @@
 // 線上請求地址
 // const URL = 'http://172.21.77.250:1314';
 // 小田本地
-const URL = 'http://172.21.76.18:1314';
-// const URL = '';
+// const URL = 'http://172.21.76.18:1314';
+const URL = '';
 
 // 只在正常模式时每 2 小时显示一次，每次显示 10s，后切换回正常模式
 let countdown = 10;
@@ -78,8 +78,8 @@ function updateTime() {
         const { data: resData } = data;
         $.each(resData, function (i, item) {
           // 判斷當前時間是否是整點
-          // const wholePoint = ((currentTime.getHours() % 2) === 0) && (currentTime.getMinutes() === 0) && (currentTime.getSeconds() < countdown);
-          const wholePoint = ((0 % 2) === 0) && (0 === 0) && (currentTime.getSeconds() < countdown);
+          const wholePoint = ((currentTime.getHours() % 2) === 0) && (currentTime.getMinutes() === 0) && (currentTime.getSeconds() < countdown);
+          // const wholePoint = ((0 % 2) === 0) && (0 === 0) && (currentTime.getSeconds() < countdown);
           if ((item.state === "PROBLEM COLSED") && wholePoint) {
             (function getLongestTimeApi() {
               $.ajax({
