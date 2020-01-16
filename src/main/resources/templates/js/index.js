@@ -65,7 +65,7 @@ function main() {
 }
 
 function updateTime() {
-
+  // let stopUpdateTime
   var currentTime, seconds, minutes, hours, times, i;
   currentTime = new Date();
 
@@ -76,33 +76,45 @@ function updateTime() {
       dataType: 'json',
       success: function (data) {
         const { data: resData } = data;
-        times = {
-          'day': resData[0].days,//顯示當前天數
-          'hour': resData[0].hours,//當前小時
-          'minute': resData[0].minutes,//當前分鐘
-          'second': resData[0].seconds,//當前秒
-        };
         $.each(resData, function (i, item) {
-          if (item.state === "LIVE DANGER") {
-            $("#clock-mode span").css({"color": "#ff0000","border":"1px solid #ff0000"}).text('LIVE DANGER，NEED HELP');
-          }
-          if (item.state === "PEATCH COMBAT") {
-            $("#clock-mode span").css({"color": "#ff0","border":"1px solid #ff0"}).text('PEATCH COMBAT');
-          }
-          if (item.state === "PROBLEM COLSED") {
-            // 判斷當前時間是否是整點
-            const wholePoint = ((currentTime.getHours() % 2) === 0) && (currentTime.getMinutes() === 0) && (currentTime.getSeconds() < countdown);
-            // const wholePoint = ((0 % 2) === 0) && (0 === 0) && (currentTime.getSeconds() < countdown);
-            if (wholePoint) {
-              times = {
-                'day': currentTime.getHours(),
-                'hour': 0,
-                'minute': 0,
-                'second': 0,
-              };
-              $("#clock-mode span").css({"color": "#9DF9A2","border":"1px solid #9DF9A2"}).text('LIVE LONGEST STABLE TIME');
-            } else {
-              $("#clock-mode span").css({"color": "#fff","border":"none"}).text('WAR CLOCK，LIVE STABLE');
+          // 判斷當前時間是否是整點
+          // const wholePoint = ((currentTime.getHours() % 2) === 0) && (currentTime.getMinutes() === 0) && (currentTime.getSeconds() < countdown);
+          const wholePoint = ((0 % 2) === 0) && (0 === 0) && (currentTime.getSeconds() < countdown);
+          if ((item.state === "PROBLEM COLSED") && wholePoint) {
+            (function getLongestTimeApi() {
+              $.ajax({
+                url: `${URL}/get_longest_safe_time`,
+                type: 'get',
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                  const { data: stopResData } = data;
+                  // clearInterval(stopUpdateTime)
+                  times = {
+                    'day': stopResData[0].days,//顯示當前天數
+                    'hour': stopResData[0].hours,//當前小時
+                    'minute': stopResData[0].minutes,//當前分鐘
+                    'second': stopResData[0].seconds,//當前秒
+                  };
+                  $("#clock-mode span").css({ "color": "#9DF9A2", "border": "1px solid #9DF9A2" }).text('LIVE LONGEST STABLE TIME');
+                }
+              })
+            }())
+          } else {
+            times = {
+              'day': resData[0].days,//顯示當前天數
+              'hour': resData[0].hours,//當前小時
+              'minute': resData[0].minutes,//當前分鐘
+              'second': resData[0].seconds,//當前秒
+            };
+            if (item.state === "PROBLEM COLSED") {
+              $("#clock-mode span").css({ "color": "#fff", "border": "none" }).text('WAR CLOCK，LIVE STABLE');
+            }
+            if (item.state === "LIVE DANGER") {
+              $("#clock-mode span").css({ "color": "#ff0000", "border": "1px solid #ff0000" }).text('LIVE DANGER，NEED HELP');
+            }
+            if (item.state === "PEATCH COMBAT") {
+              $("#clock-mode span").css({ "color": "#ff0", "border": "1px solid #ff0" }).text('PEATCH COMBAT');
             }
           }
         })
