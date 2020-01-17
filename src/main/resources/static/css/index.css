@@ -215,7 +215,7 @@ body main #clock .time-container {
 }
 body main #clock .time-container .num {
   position: absolute;
-  top: -4px;
+  top: 0px;
   left: 0px;
   display: inline-block;
   z-index: 1;
@@ -230,8 +230,8 @@ body main #clock .time-container .num {
     inset 0 2px 0px rgba(255, 255, 255, 0.25);
 }
 body main #clock .time-container .num.bottom {
-  top: 50%;
-  height: 46%;
+  top: 52%;
+  height: 45%;
 }
 body main #clock .time-container .num.bottom .bottom-container {
   margin-top: -80%;
@@ -396,7 +396,7 @@ body main #clock .time-container .digit .ring.ring-right {
 }
 .war-clock-state {
   position: absolute;
-  top: 20%;
+  top: 8%;
   width: 100%;
   text-align: center;
   font-size: 60px;
