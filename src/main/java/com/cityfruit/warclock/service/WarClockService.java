@@ -13,4 +13,11 @@ public interface WarClockService {
     public Map<String, Object> getLiveSafeTime();
 
     public String createOrUpdateCases(CreateOrUpdateCaseParam param) throws IOException;
+
+    /**
+     * 获取最长稳定时长
+     *
+     * @return 各团队最长稳定时长
+     */
+    Map<String, Object> getLongestSafeTime();
 }

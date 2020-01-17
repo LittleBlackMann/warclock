@@ -30,7 +30,7 @@ public class WarClockController {
 
     @ResponseBody
     @RequestMapping(value = "/stop", method = RequestMethod.GET)
-    public String stopRedio() throws IOException{
+    public String stopRedio() throws IOException {
         AudioPlayRedio.stopPlay();
         return "停止";
     }
@@ -46,6 +46,12 @@ public class WarClockController {
     @RequestMapping(value = "/get_safe_time", method = RequestMethod.GET)
     public Map<String, Object> getSafeTime() {
         return warClockService.getLiveSafeTime();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/get_longest_safe_time", method = RequestMethod.GET)
+    public Map<String, Object> getLongestSafeTime() {
+        return warClockService.getLongestSafeTime();
     }
 
     @ResponseBody
