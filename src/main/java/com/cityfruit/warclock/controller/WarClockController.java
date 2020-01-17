@@ -63,7 +63,7 @@ public class WarClockController {
 
     @RequestMapping(value = "/war_clock_index")
     public String warClockIndex() {
-        return "warclock/index";
+        return "index";
     }
 
 }
