@@ -18,10 +18,19 @@ public interface WarClockRepository extends JpaRepository<WarClockEntity, Intege
     public List<WarClockEntity> getUnDealCase();
 
 
-    @Query(value = "select w1.* from  warclock w1 inner join (select id,  max(create_ts) maxts from warclock where create_ts is not null) as w2 on w1.create_ts = w2.maxts", nativeQuery = true)
+    @Query(value = "select w1.* from  warclock w1 inner join (select id,  max(create_ts) maxts from warclock where create_ts is not null group by team) as w2 on w1.create_ts = w2.maxts", nativeQuery = true)
     public List<WarClockEntity> getLastDealCase();
 
 
     @Query(value = "select a.* from warclock a inner join (select id ,max(create_ts) maxts from warclock where team=?1 ) as b on a.create_ts = b.maxts\n", nativeQuery = true)
     public WarClockEntity getNewCase(String team);
+
+    /**
+     * 根据团队名称查询所有数据，以 id 倒序排序
+     *
+     * @param team 群组名称
+     * @return WarClockEntities
+     */
+    @Query(value = "select * from warclock where team = ?1 order by id desc", nativeQuery = true)
+    List<WarClockEntity> getAllByTeam(String team);
 }
