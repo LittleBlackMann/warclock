@@ -211,13 +211,13 @@ public class WarClockServiceImpl implements WarClockService {
         }
         ResultVo resultVo = new ResultVo();
         resultVo.setTeam(team);
-        Integer day = Math.toIntExact(longestSafeTime / 1000 / 60 / 60 / 24);
+        Integer day = Math.toIntExact(longestSafeTime / 1000L / 60L / 60L / 24L);
         resultVo.setDays(day + "");
-        Integer hour = Math.toIntExact((longestSafeTime - day * 24 * 60 * 60 * 1000) / 1000 / 60 / 60);
+        Integer hour = Math.toIntExact((longestSafeTime - day * 24L * 60L * 60L * 1000L) / 1000L / 60L / 60L);
         resultVo.setHours(hour + "");
-        Integer minute = Math.toIntExact((longestSafeTime - day * 24 * 60 * 60 * 1000 - hour * 60 * 60 * 1000) / 1000 / 60);
+        Integer minute = Math.toIntExact((longestSafeTime - day * 24L * 60L * 60L * 1000L - hour * 60L * 60L * 1000L) / 1000L / 60L);
         resultVo.setMinutes(minute + "");
-        Integer second = Math.toIntExact((longestSafeTime - day * 24 * 60 * 60 * 1000 - hour * 60 * 60 * 1000 - minute * 60 * 1000) / 1000);
+        Integer second = Math.toIntExact((longestSafeTime - day * 24L * 60L * 60L * 1000L - hour * 60L * 60L * 1000L - minute * 60L * 1000L) / 1000L);
         resultVo.setSeconds(second + "");
         return resultVo;
     }
